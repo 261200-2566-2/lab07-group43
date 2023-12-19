@@ -31,22 +31,31 @@ public class MSet<E> implements Set<E>{
 
     @Override
     public boolean add(E element) {
-        HMap.put(element ,0);
-        return true;
+        if(!contains(element)) {
+            HMap.put(element, 0);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean remove(Object element) {
-        HMap.remove(element ,0);
-        return true;
+        if(contains(element)){
+            HMap.remove(element ,0);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
+        boolean m = false;
         for(E i : c){
-            add(i);
+            if(add(i)){
+                m = true;
+            }
         }
-        return true;
+        return m; // Fix it
     }
 
     @Override
